@@ -1,5 +1,5 @@
 import requests
-from province import ProvinceList
+from province.province import ProvinceList
 import time
 import json
 
