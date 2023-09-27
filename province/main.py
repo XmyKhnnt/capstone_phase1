@@ -1,6 +1,7 @@
 import requests
-from province.province import ProvinceList
+from province_base import ProvinceList
 import time
+
 import json
 
 class ProvinceScraper:
@@ -8,7 +9,7 @@ class ProvinceScraper:
    
     def __init__(self) -> None:
        self.province = ProvinceList()
-       self.result = []
+       self.result = {}
        
        
     def get_data(self, province, country):
@@ -53,17 +54,16 @@ class ProvinceScraper:
         for item in list:
             data = self.get_data(item, 'philippines')
             cleaned_data = self.clean_data(data)
-            processed_data = self.process_data(item, cleaned_data)
+            self.result[item] = cleaned_data
             
             print(item)
-            
-            self.result.append(processed_data)
             time.sleep(1)
             
             print(f'{item} DONE' )
             print()
+            
         
-        self.save_results_to_json('province_results.json')
+        self.save_results_to_json('new_result.json')
         
     @staticmethod
     def main():
@@ -76,3 +76,8 @@ if __name__ == '__main__':
     ProvinceScraper.main()
         
         
+
+
+
+
+
